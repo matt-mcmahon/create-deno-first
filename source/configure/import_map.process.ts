@@ -4,6 +4,6 @@ const [tempDir = "temp"] = Deno.args;
 
 Deno.mkdirSync(tempDir, { recursive: true });
 
-const env = await configImportMap(tempDir);
+const importMap = await configImportMap(tempDir)("import_map.json");
 
-console.log(JSON.stringify(env));
+console.log(importMap);
