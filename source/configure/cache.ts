@@ -1,7 +1,6 @@
-import { ifElse, when } from "../../remote/functional.ts";
-import { askYesNo, IO, isYes, noop, question } from "../../remote/fluentty.ts";
-import type { ConfigModule } from "../configure.ts";
 import { assertEquals as assert } from "../../remote/asserts.ts";
+import { askYesNo, IO, question } from "../../remote/fluentty.ts";
+import { ifElse } from "../../remote/functional.ts";
 
 function configDenoDir(defaultTo: string): () => Promise<[string, string][]> {
   return async () =>
@@ -31,8 +30,7 @@ export const configureCache = function* (
   const q1 = [
     configDenoCache(Deno.env.get("USE_CACHE") ? "yes" : "no"),
   ];
-  const a1
-   = yield q1;
+  const a1 = yield q1;
 
   const afterIO = [
     ifElse(
