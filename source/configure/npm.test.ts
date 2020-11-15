@@ -24,7 +24,7 @@ Deno.test("npm.ts :: use default", async () => {
 
   {
     const actual = JSON.parse(strip(await tp.read()));
-    const expected = [["NPM", "npm"]];
+    const expected = "npm";
     const message = `expected:\n\t${Deno.inspect(expected)}\n` +
       `got:\n\t${Deno.inspect(actual)}`;
     assertEquals(actual, expected, message);
@@ -47,7 +47,7 @@ Deno.test("npm.ts :: use npm", async () => {
 
   {
     const actual = JSON.parse(strip(await tp.read()));
-    const expected = [["NPM", "npm"]];
+    const expected = "npm";
     const message = `expected:\n\t${Deno.inspect(expected)}\n` +
       `got:\n\t${Deno.inspect(actual)}`;
     assertEquals(actual, expected, message);
@@ -71,7 +71,7 @@ Deno.test("npm.ts :: use pnpm", async () => {
 
   {
     const actual = JSON.parse(strip(await tp.read()));
-    const expected = [["NPM", "pnpm"]];
+    const expected = "pnpm";
     const message = `expected:\n\t${Deno.inspect(expected)}\n` +
       `got:\n\t${Deno.inspect(actual)}`;
     assertEquals(actual, expected, message);
@@ -95,7 +95,7 @@ Deno.test("npm.ts :: use yarn", async () => {
 
   {
     const actual = JSON.parse(strip(await tp.read()));
-    const expected = [["NPM", "yarn"]];
+    const expected = "yarn";
     const message = `expected:\n\t${Deno.inspect(expected)}\n` +
       `got:\n\t${Deno.inspect(actual)}`;
     assertEquals(actual, expected, message);
@@ -129,7 +129,7 @@ Deno.test("npm.ts :: use junk, retry", async () => {
 
   {
     const actual = JSON.parse(strip(await tp.read()));
-    const expected = [["NPM", "npm"]];
+    const expected = "npm";
     const message = `expected:\n\t${Deno.inspect(expected)}\n` +
       `got:\n\t${Deno.inspect(actual)}`;
     assertEquals(actual, expected, message);
