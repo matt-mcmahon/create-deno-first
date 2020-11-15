@@ -28,18 +28,9 @@ Deno.test({
     const tp = await startTestProcess({ pretest, posttest });
 
     {
-      const jsonString = strip(await tp.read());
-      const actual = JSON.parse(jsonString);
-      const expected = { NPM_PACKAGE_NAME: "@mwm/create-deno-first" };
+      const actual = strip(await tp.read());
+      const expected = "@mwm/create-deno-first";
       assertEquals(actual, expected);
-    }
-
-    const status = await tp.process.status();
-
-    {
-      const actual = status.success;
-      const expected = true;
-      assertEquals(actual, expected, "Process should EXIT_SUCCESS");
     }
 
     await tp.end();
@@ -73,18 +64,9 @@ Deno.test({
     await tp.write("yes");
 
     {
-      const jsonString = strip(await tp.read());
-      const actual = JSON.parse(jsonString);
-      const expected = { NPM_PACKAGE_NAME: basename(tempDir) };
+      const actual = strip(await tp.read());
+      const expected = basename(tempDir);
       assertEquals(actual, expected);
-    }
-
-    const status = await tp.process.status();
-
-    {
-      const actual = status.success;
-      const expected = true;
-      assertEquals(actual, expected, "Process should EXIT_SUCCESS");
     }
 
     await tp.end();
