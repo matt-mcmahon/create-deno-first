@@ -62,14 +62,14 @@
       "outputCapture": "std"
     },
     {
-      "name": "launch terminal",
+      "name": "test terminal",
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "deno",
       "console": "integratedTerminal",
       "runtimeArgs": [
-        "run",
+        "test",
         "--inspect-brk",
         "--cached-only",
         "--unstable",

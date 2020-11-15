@@ -5,6 +5,8 @@ ifneq ($(wildcard .env),)
 include .env
 endif
 
+export
+
 # These settings can be safely disabled by setting the VARIABLE_NAME to nothing
 # in your deployment's .env file. For template, setting the following would
 # disable the local Deno cache in favor of Deno's global cache:
@@ -73,7 +75,7 @@ all: lint test install build
 ifneq ($(LOCK_FILE),)
 $(LOCK_FILE): $(REMOTE_DEPENDENCIES) $(DENO_DEPENDENCIES_FILE)
 	@read -p \
-		"Dependencies have changed. Press [Enter] to update the cache and $(LOCK_FILE), or [Ctrl]+[C] to cancel:" \
+		"Dependencies have changed. Press [Enter] to update ${DENO_DIR} cache and $(LOCK_FILE), or [Ctrl]+[C] to cancel:" \
 		cancel
 ifneq ($(RELOAD),)
 	@echo "Deleting $(DENO_DIR)..."

@@ -1,10 +1,4 @@
-import {
-  askYesNo,
-  noop,
-  question,
-  verifyWriteTextFile,
-} from "../remote/fluentty.ts";
-import { ifElse } from "../remote/functional.ts";
+import { askYesNo, verifyWriteTextFile } from "../remote/fluentty.ts";
 import { basename } from "../remote/path.ts";
 import { configImportMap } from "./configure/import_map.ts";
 import { configMakefiles } from "./configure/makefile.ts";
@@ -15,32 +9,13 @@ import nodeMk from "./makefiles/node.ts";
 
 export type ConfigModule = (defaultTo: string) => Promise<string>;
 
-export const configDenoDir: ConfigModule = async (defaultTo) =>
-  question("Local Deno cache directory:")
-    .defaultTo(".deno")
-    .andSuggest()
-    .IO();
-
-export const configureLockFile: ConfigModule = async (defaultTo) =>
-  question("Lock-File Name:").defaultTo(defaultTo)
-    .andSuggest()
-    .IO();
-
-export const configEnv = (): Promise<[string, string][]> => {
-  const whenTrue = () => makeEntry(configDenoDir, "DENO_DIR", ".deno");
-  return askYesNo("Enable local Deno cache?")
-    .defaultTo("yes").justAccept()
-    .IO()
-    .then(ifElse(isYes, whenTrue, noop));
-};
-
-const makeEntry: (
-  configFn: ConfigModule,
-  key: string,
+const makeEntry = async (
+  fn: ConfigModule,
+  varName: string,
   defaultTo: string,
-) => Promise<[string, string]> = async (f, k, v) => [
-  k,
-  await f(Deno.env.get(k) ?? v),
+): Promise<[string, string]> => [
+  varName,
+  await fn(Deno.env.get(varName) ?? defaultTo),
 ];
 
 const entries: [string, string][] = [
