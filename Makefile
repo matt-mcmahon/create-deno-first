@@ -4,7 +4,6 @@
 ifneq ($(wildcard .env),)
 include .env
 endif
-export
 
 # These settings can be safely disabled by setting the VARIABLE_NAME to nothing
 # in your deployment's .env file. For template, setting the following would
@@ -69,7 +68,7 @@ define print-header
 	@echo
 endef
 
-all: install lint build test-all
+all: lint test install build
 
 ifneq ($(LOCK_FILE),)
 $(LOCK_FILE): $(REMOTE_DEPENDENCIES) $(DENO_DEPENDENCIES_FILE)
