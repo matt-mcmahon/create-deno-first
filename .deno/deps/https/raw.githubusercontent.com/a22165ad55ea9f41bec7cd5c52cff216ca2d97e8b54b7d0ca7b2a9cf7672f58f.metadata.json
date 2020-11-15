@@ -1,0 +1,27 @@
+{
+  "headers": {
+    "connection": "keep-alive",
+    "x-fastly-request-id": "055833371e21854551e9d700bdc068d29708b9b3",
+    "source-age": "93",
+    "expires": "Sat, 14 Nov 2020 18:55:16 GMT",
+    "x-cache": "MISS, HIT",
+    "access-control-allow-origin": "*",
+    "x-served-by": "cache-wdc5583-WDC",
+    "x-xss-protection": "1; mode=block",
+    "accept-ranges": "bytes",
+    "strict-transport-security": "max-age=31536000",
+    "date": "Sat, 14 Nov 2020 18:50:16 GMT",
+    "x-github-request-id": "9142:6F94:18F33E:1CBEB9:5FB01AA9",
+    "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+    "x-cache-hits": "0, 1",
+    "content-type": "text/plain; charset=utf-8",
+    "cache-control": "max-age=300",
+    "via": "1.1 varnish (Varnish/6.0), 1.1 varnish",
+    "x-timer": "S1605379816.330913,VS0,VE1",
+    "vary": "Authorization,Accept-Encoding",
+    "x-frame-options": "deny",
+    "etag": "W/\"3a0baf11dc17a54e46cae836da46504526300c4607c5b9d48898743f1454efcb\"",
+    "x-content-type-options": "nosniff"
+  },
+  "url": "https://raw.githubusercontent.com/matt-mcmahon/functional/next/source/app/functions/identity.ts"
+}

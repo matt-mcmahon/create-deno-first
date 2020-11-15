@@ -1,6 +1,8 @@
-import { assertEquals, assertNotEquals, test } from "../lib/test-framework.ts";
 import { Inspect, inspect } from "../lib/inspect.ts";
+import { assertEquals, assertNotEquals, test } from "../lib/test-framework.ts";
 import { hasOwnOrDefault } from "./utils.ts";
+
+export type { Inspect };
 
 export type Plan = {
   actual: unknown;
@@ -16,7 +18,7 @@ export interface Assert {
   not(plan: Plan): void;
 }
 
-export interface AssertFunction {
+interface NativeAssert {
   (actual: unknown, expected: unknown, msg?: string): void;
 }
 
@@ -37,7 +39,7 @@ export async function describe(
   return test(prefix, async () => implementation({ assert, inspect }));
 }
 
-export function makeAssert(assert: AssertFunction) {
+export function makeAssert(assert: NativeAssert) {
   return async (plan: Plan | Promise<Plan>) => {
     const p = await plan;
     const expected = hasOwnOrDefault("expected")(true)(p);
