@@ -1,4 +1,4 @@
-import { askYesNo, verifyWriteTextFile } from "../remote/fluentty.ts";
+import { verifyWriteTextFile } from "../remote/fluentty.ts";
 import { basename } from "../remote/path.ts";
 import { configImportMap } from "./configure/import_map.ts";
 import { configMakefiles } from "./configure/makefile.ts";
@@ -19,7 +19,7 @@ const makeEntry = async (
 ];
 
 const entries: [string, string][] = [
-  await makeEntry(configImportMap, "IMPORT_MAP", "import_map.json"),
+  await makeEntry(configImportMap(Deno.cwd()), "IMPORT_MAP", "import_map.json"),
   await makeEntry(configNPM, "NPM", "npm"),
   await makeEntry(
     configPackageJSON("platform/node"),

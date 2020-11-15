@@ -24,9 +24,7 @@ const configDenoCache = (defaultTo: string) =>
   askYesNo("Enable local Deno cache?")
     .defaultTo(defaultTo).justAccept();
 
-export const configureCache = function* (
-  defaultTo: string,
-) {
+export const configureCache = function* (defaultTo: string) {
   const q1 = [
     configDenoCache(Deno.env.get("USE_CACHE") ? "yes" : "no"),
   ];
