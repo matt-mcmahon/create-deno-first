@@ -1,8 +1,9 @@
 import { assertEquals as assert } from "../../remote/asserts.ts";
 import { askYesNo, IO, question } from "../../remote/fluentty.ts";
 import { ifElse } from "../../remote/functional.ts";
+import { ConfigModule } from "../configure.ts";
 
-function configDenoDir(defaultTo: string): () => Promise<[string, string][]> {
+export const configDenoDir: ConfigModule = (defaultTo: string): () => Promise<[string, string][]> {
   return async () =>
     question("Local Deno cache directory:")
       .defaultTo(defaultTo)
@@ -24,7 +25,7 @@ const configDenoCache = (defaultTo: string) =>
   askYesNo("Enable local Deno cache?")
     .defaultTo(defaultTo).justAccept();
 
-export const configureCache = function* (defaultTo: string) {
+export const configCache = function* (defaultTo: string) {
   const q1 = [
     configDenoCache(Deno.env.get("USE_CACHE") ? "yes" : "no"),
   ];
@@ -41,8 +42,8 @@ export const configureCache = function* (defaultTo: string) {
   return q1;
 };
 
-Deno.test("configureCache", async () => {
-  const doIO = configureCache("yes");
+Deno.test("configCache", async () => {
+  const doIO = configCache("yes");
 
   const q1 = doIO.next().value;
   const a1 = await IO(...q1);

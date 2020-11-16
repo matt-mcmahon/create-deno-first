@@ -1,5 +1,7 @@
-import { configEnv } from "./env.ts";
+import { IO } from "../../remote/fluentty.ts";
+import { configCache } from "./cache.ts";
 
-await configEnv().then((env) => {
-  console.log(env.stringify());
-});
+for (const qs of configCache(".deno")) {
+  const as = IO(...qs);
+  console.table(as);
+}

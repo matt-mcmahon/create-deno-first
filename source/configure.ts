@@ -1,4 +1,4 @@
-import { verifyWriteTextFile } from "../remote/fluentty.ts";
+import { askYesNo, verifyWriteTextFile } from "../remote/fluentty.ts";
 import { basename } from "../remote/path.ts";
 import { configImportMap } from "./configure/import_map.ts";
 import { configMakefiles } from "./configure/makefile.ts";
@@ -17,6 +17,10 @@ const makeEntry = async (
   varName,
   await fn(Deno.env.get(varName) ?? defaultTo),
 ];
+
+const useLocalCache = (defaultTo = "yes") =>
+  askYesNo("Enable local Deno cache?")
+    .defaultTo(defaultTo).justAccept();
 
 const entries: [string, string][] = [
   await makeEntry(configImportMap(Deno.cwd()), "IMPORT_MAP", "import_map.json"),

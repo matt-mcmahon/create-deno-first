@@ -3,7 +3,7 @@ import { configureTestProcess } from "../../remote/fluentty.ts";
 import { strip } from "../utils.ts";
 
 const spawnTestProcess = configureTestProcess(
-  "source/configure/env.process.ts",
+  "source/configure/cache.process.ts",
 );
 
 Deno.test("cache.ts :: default values", async () => {
